@@ -31,7 +31,7 @@ public class new_account extends javax.swing.JFrame {
         this.setBackground(Color.gray);
     }
 //    login_class you = new login_class();
-   reg_class me = new reg_class();
+  
 //main k = new main();
     /**
      * This method is called from within the constructor to initialize the form.
