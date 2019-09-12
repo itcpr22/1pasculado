@@ -49,7 +49,6 @@ public class new_account extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         fname = new javax.swing.JTextField();
         uname = new javax.swing.JTextField();
-        h = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
         lname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -96,7 +95,11 @@ public class new_account extends javax.swing.JFrame {
             }
         });
 
-        h.setText("_");
+        pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passActionPerformed(evt);
+            }
+        });
 
         lname.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 12)); // NOI18N
         lname.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +141,7 @@ public class new_account extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("                           Create New Account");
+        jLabel7.setText("                                  Create New Account");
 
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btn, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -146,7 +149,6 @@ public class new_account extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(fname, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(uname, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(h, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(pass, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(lname, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -171,20 +173,14 @@ public class new_account extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(16, 16, 16)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(h, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 164, Short.MAX_VALUE))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lname, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(pass, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cpass)
-                                    .addComponent(uname)
-                                    .addComponent(fname)))))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lname, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pass, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cpass)
+                            .addComponent(uname)
+                            .addComponent(fname)))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -218,9 +214,7 @@ public class new_account extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cpass, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(h)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -242,14 +236,15 @@ public class new_account extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void unameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unameActionPerformed
-        // TODO add your handling code here:
+jButton1ActionPerformed(evt);        // TODO add your handling code here:
     }//GEN-LAST:event_unameActionPerformed
 
     private void lnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameActionPerformed
-        // TODO add your handling code here:
+jButton1ActionPerformed(evt);        // TODO add your handling code here:
     }//GEN-LAST:event_lnameActionPerformed
 
     private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
+jButton1ActionPerformed(evt);
         // TODO add your handling code here:
     }//GEN-LAST:event_fnameActionPerformed
 
@@ -290,6 +285,7 @@ if (ln.isEmpty() || fn.isEmpty() || un.isEmpty() || password.isEmpty()){
              int rs =  pstmt.executeUpdate();
     JFrame main = new main();
     main.setVisible(true);
+    this.setVisible(false);
 //    try{
 //        Class.forName("com.mysql.jdbc.Driver");
 //        String you = "jdbc:mysql://localhost/login?"
@@ -416,6 +412,10 @@ jButton1ActionPerformed(evt);
         // TODO add your handling code here:
     }//GEN-LAST:event_cpassKeyReleased
 
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+jButton1ActionPerformed(evt);        // TODO add your handling code here:
+    }//GEN-LAST:event_passActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,7 +455,6 @@ jButton1ActionPerformed(evt);
     private javax.swing.JButton btn;
     private javax.swing.JPasswordField cpass;
     private javax.swing.JTextField fname;
-    private javax.swing.JLabel h;
     private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;

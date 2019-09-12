@@ -216,7 +216,7 @@ String password = new String (pass.getPassword());
     if(rs.next()){
        
         JOptionPane.showMessageDialog(rootPane,"You're a member");
-        
+       this.setVisible(false);
         
     }else{
         
