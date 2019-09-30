@@ -27,8 +27,10 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        this.setLocationRelativeTo(null);
         
     }
+    login_class hey = new login_class();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -197,43 +199,19 @@ this.setVisible(false);
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 String username = user.getText();
 String password = new String (pass.getPassword());
-
-
-   if(username.isEmpty() || password.isEmpty()){
-       JOptionPane.showMessageDialog(rootPane, "Need to Fill in", "Error", JOptionPane.ERROR_MESSAGE);
-   }  else{
-          try{
-   Class.forName("com.mysql.jdbc.Driver");
-    String URL = "jdbc:mysql://localhost/login?"
-            + "user=root&password=";
-    Connection conn = DriverManager.getConnection(URL);
-    PreparedStatement pstmt = conn.prepareStatement("Select * from tbl1 where users = ? and passs = ?");
-    pstmt.setString(1, username);
-    pstmt.setString(2, password);
-    ResultSet rs = pstmt.executeQuery();
-    System.out.println("1");
-    
-    if(rs.next()){
-       
-        JOptionPane.showMessageDialog(rootPane,"You're a member");
-       this.setVisible(false);
-        
-    }else{
-        
-        JOptionPane.showMessageDialog(rootPane, "Invalid Username or Password", "ERROR", JOptionPane.ERROR_MESSAGE);
-    user.setText(null);
-    pass.setText(null);
-    user.requestFocusInWindow();
-  
-    }
-}       catch (ClassNotFoundException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        
-        }
-        
-   }   
+   int y = hey.loginform(username, password);
+      
+      if (y==1){
+          
+         
+          this.setVisible(false);
+           JFrame productadd = new productadd();
+          productadd.setVisible(true);
+      }else{
+          JOptionPane.showMessageDialog(rootPane, "Invalid username or password!!", "Error", JOptionPane.ERROR_MESSAGE);
+          user.setText(null);
+          pass.setText(null);
+      }
        
         
         

@@ -30,6 +30,7 @@ public class new_account extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setBackground(Color.gray);
     }
+   newaccount_class hello = new newaccount_class();
 //    login_class you = new login_class();
   
 //main k = new main();
@@ -249,146 +250,39 @@ jButton1ActionPerformed(evt);
     }//GEN-LAST:event_fnameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        
+ 
         String ln  = lname.getText();
 String fn = fname.getText();
 String un = uname.getText();
 String password = new String (pass.getPassword());
 String confirmpass = new String (cpass.getPassword());
-   
-   
-  
-
-if (ln.isEmpty() || fn.isEmpty() || un.isEmpty() || password.isEmpty()){
-    JOptionPane.showMessageDialog(rootPane, "All Fields are Required!!!", "ERROR", JOptionPane.ERROR_MESSAGE);
-    
-    fname.requestFocusInWindow();
-    int o = 8;
-  
-   
-   
-}else{
-     if(confirmpass.equals(password)){
-//        JOptionPane.showMessageDialog(rootPane, "congrtas");
-   
-    try{
-    Class.forName("com.mysql.jdbc.Driver");
-    String URL = "jdbc:mysql://localhost/login?"
-            +"user=root&pass=";
-    Connection conn = DriverManager.getConnection(URL);
-    PreparedStatement pstmt = conn.prepareStatement("Insert into tbl1 (users , passs,firstname,lastname)Values (?,?,?,?)");
-    pstmt.setString(1, un);
-    pstmt.setString(2, confirmpass);
-    pstmt.setString(3, fn);
-    pstmt.setString(4, ln);
-             int rs =  pstmt.executeUpdate();
-    JFrame main = new main();
-    main.setVisible(true);
-    this.setVisible(false);
-//    try{
-//        Class.forName("com.mysql.jdbc.Driver");
-//        String you = "jdbc:mysql://localhost/login?"
-//                +"user=root&pass=";
-//        Connection connn = DriverManager.getConnection(you);
-//        PreparedStatement pstmtm = connn.prepareStatement("select users from tbl1");
-//        ResultSet rs1 = pstmtm.executeQuery();
-//        String name;
-//        if(rs1.next()){
-//            name = rs1.getString("users");
-//            if(name ==1){
-//                System.out.println("exist");
-//            }
-//        }
-//        
-//    }
-//    
-}   catch (ClassNotFoundException ex) {
-        Logger.getLogger(new_account.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(new_account.class.getName()).log(Level.SEVERE, null, ex);
-    }
-   }else{
-         
-        JOptionPane.showMessageDialog(rootPane, "Password Don't Match");
-        cpass.setText(null);
-        cpass.setBackground(Color.red);
+    int l = hello.cpass(password, confirmpass);
+        int o = hello.checkUsername(un);
         
-        
-    }
-        
-
-    
-//    String passw = new String (pass.getPassword());
-//String confirmpass = new String (cpass.getPassword());
-
-
-
-    
-        
-        
-//        try{
-//    Class.forName("com.mysql.jdbc.Driver");
-//    String URL = "jdbc:mysql://localhost/login?"
-//            +"user=root&pass=";
-//    Connection conn = DriverManager.getConnection(URL);
-//    PreparedStatement pstmt = conn.prepareStatement("Insert into tbl1 (users , passs,firstname,lastname)Values (?,?,?,?)");
-//    pstmt.setString(1, username);
-//    pstmt.setString(2, password);
-//    pstmt.setString(3, firstname);
-//    pstmt.setString(4, lastname);
-//   pstmt.executeUpdate();
-//   System.out.println("2");
-//   JFrame main = new main();
-//   main.setVisible(true);
-//}       catch (ClassNotFoundException ex) {
-//            Logger.getLogger(new_account.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(new_account.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
+        if(!"".equals(fn) && !"".equals(un) && !"".equals(password) && !"".equals(confirmpass)){
+           
+                if(o==0){
+                    if(l==1){
+                    int k = hello.account(un, password, fn, password);
+                    if(k==1){
+                        JFrame main = new main();
+                       main.setVisible(true);
+                        this.setVisible(false);
+                    }
+                }else{
+                     JOptionPane.showMessageDialog(rootPane, "Password don't match", "error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else{
+               
+                 JOptionPane.showMessageDialog(rootPane, "Username already exist", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }else{
+             JOptionPane.showMessageDialog(rootPane, "Finish all!!", "Warning", JOptionPane.WARNING_MESSAGE);
+             
+        }
    
-//    try{
-//        Class.forName("com.mysql.jdbc.Driver");
-//        String URL = "jdbc:mysql://localhost/login"
-//                +"user=root&pass=";
-//        Connection conn = DriverManager.getConnection(URL);
-//        PreparedStatement pstmt = conn.prepareStatement("Select concat(firstname,\" \",lastname) from tbl1");
-//            
-//    } catch (ClassNotFoundException ex) {
-//        Logger.getLogger(new_account.class.getName()).log(Level.SEVERE, null, ex);
-//    } catch (SQLException ex) {
-//        Logger.getLogger(new_account.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-
-//try{
-//    Class.forName("com.mysql.jdbc.Driver");
-//    String conURL = "jdbc:mysql://localhost/login?"
-//            + "user=root&pass=";
-//    Connection conn = DriverManager.getConnection(conURL);
-//    PreparedStatement pstmt = conn.prepareStatement("insert into info(firstname,lastname)values (?,?)");
-//    pstmt.setString(1, firstname);
-//    pstmt.setString(2, lastname);
-//     pstmt.executeUpdate();
-//     System.out.println("3");
-//     
-//     JOptionPane.showMessageDialog(rootPane, "You are now a member");
-//     JOptionPane.showMessageDialog(rootPane, "Now Try to login");
-//}       catch (ClassNotFoundException ex) {
-//            Logger.getLogger(new_account.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(new_account.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//}
-//try{
-//    Class.forName("com.mysql.jdbc.Driver");
-//    String URL = "jdbc:mysql://localhostlogin?"
-//            + "user=root&pass=";
-//    Connection conn = DriverManager.getConnection(URL);
-//    PreparedStatement pstmt  = conn.prepareStatement("")
-//}
-}
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
