@@ -31,6 +31,7 @@ public class productadd extends javax.swing.JFrame {
     }
     productadd_class me = new productadd_class();
     line con = new line();
+    delete erase = new delete();
    final void displayall(){
     try{
         Class.forName("com.mysql.jdbc.Driver");
@@ -83,6 +84,7 @@ public class productadd extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 255));
 
+        tbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -103,6 +105,7 @@ public class productadd extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbl);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,6 +114,7 @@ public class productadd extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(153, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Add");
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 255), 2));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -189,12 +193,25 @@ public class productadd extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 102, 102));
         jButton2.setText("Delete");
+        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51), 2));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(255, 255, 102));
         jButton3.setText("Update");
+        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51), 2));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel5.setText("               Pasculado's Grocery Store");
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel5.setText("                      Pasculado's Grocery Store");
+        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -228,9 +245,9 @@ public class productadd extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -266,20 +283,64 @@ public class productadd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String product = pn.getText();
+        String prod = pn.getText();
         int quantity = (Integer)qty.getValue();
         Object price = p.getValue();
-        String np = p.toString();
-        if(product.isEmpty()&&np.isEmpty()&&!"".equals(price)){
-            JOptionPane.showMessageDialog(rootPane, "Please finish your work");
+        String l = qty.toString();
+        
+        if(!"".equals(prod) && !"".equals(quantity) && !"".equals(price)){
+             int y = me.product(prod, quantity, price);
+            JOptionPane.showMessageDialog(rootPane, "Added product successfully");
+            displayall();
+        
         }else{
-            int y = me.product( product, quantity, price);
-        int u = me.checkprod(product);
-        displayall();
+           JOptionPane.showMessageDialog(rootPane, "No product added","Error",JOptionPane.ERROR_MESSAGE);
         }
+
+
+
+//        String product = pn.getText();
+//        int quantity = (Integer)qty.getValue();
+//        Object price = p.getValue();
+//        String np = price.toString();
+//         String l = qty.toString();
+//        System.out.println("hello");
+//        if(product.isEmpty() || l.isEmpty() || np.isEmpty()){
+//            JOptionPane.showMessageDialog(rootPane, "Please finish your work");
+//        }else{
+//            int y = me.product( product, quantity, price);
+//        int u = me.checkprod(product);
+//        JOptionPane.showMessageDialog(rootPane, "Added product successfully");
+//        displayall();
+//        }
         
             
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        int select = tbl.getSelectedRow();
+        if (select != -1) {     
+            int column = 0;  
+            String id = tbl
+                    .getValueAt(select, column).toString();
+            int ans = JOptionPane.showConfirmDialog(rootPane,
+                    "Are you sure you want to delete this",
+                    "Delete Confirmation",
+                    JOptionPane.YES_NO_OPTION);
+            if(ans == JOptionPane.YES_OPTION){
+                erase.deleted(id);
+                displayall();
+                JOptionPane.showMessageDialog(rootPane, "Successfully deleted");
+            }
+        }else{
+                JOptionPane.showMessageDialog(rootPane, "Please select a row to be deleted");
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
