@@ -5,6 +5,7 @@
  */
 package project;
 
+import com.sun.glass.events.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -124,6 +125,11 @@ public class productadd extends javax.swing.JFrame {
         qty.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         p.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        p.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pKeyTyped(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -178,15 +184,15 @@ public class productadd extends javax.swing.JFrame {
                         .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(p, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(qty, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(p, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addComponent(jButton1)
                 .addContainerGap(83, Short.MAX_VALUE))
         );
@@ -284,15 +290,21 @@ public class productadd extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String prod = pn.getText();
-        int quantity = (Integer)qty.getValue();
+        int quantity = (int)qty.getValue();
         Object price = p.getValue();
-        String l = qty.toString();
+        String d = p.getText();
         
-        if(!"".equals(prod) && !"".equals(quantity) && !"".equals(price)){
+        if(!"".equals(prod) && !"".equals(d) ){
+            if(quantity!=0){
              int y = me.product(prod, quantity, price);
             JOptionPane.showMessageDialog(rootPane, "Added product successfully");
             displayall();
-        
+            pn.setText(null);
+            p.setText(null);
+            qty.setValue(0);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "You're quantity is 0");
+                }
         }else{
            JOptionPane.showMessageDialog(rootPane, "No product added","Error",JOptionPane.ERROR_MESSAGE);
         }
@@ -341,6 +353,14 @@ public class productadd extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Please select a row to be deleted");
             }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void pKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pKeyTyped
+       int c = evt.getKeyChar();
+       if(!Character.isDigit(c) || c==KeyEvent.VK_BACKSPACE || c==KeyEvent.VK_DELETE){
+           getToolkit().beep();
+           evt.consume();
+       }
+    }//GEN-LAST:event_pKeyTyped
 
     /**
      * @param args the command line arguments
