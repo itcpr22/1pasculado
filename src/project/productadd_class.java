@@ -70,4 +70,27 @@ public class productadd_class {
      }
         return x;
     }
+      public int edit(Object id, String prod_name, Object price){
+       int y = 0;
+        try{
+           Class.forName("com.mysql.jdbc.Driver");
+           Connection conn = DriverManager.getConnection(con.url, con.user, con.pass);
+           String query = "update addproduct set prod_name = ?, price = ? where id = ?;";
+           PreparedStatement pstmt = conn.prepareStatement(query);
+           pstmt.setString(1, prod_name);
+           float nprice = Float.parseFloat(price.toString());
+           pstmt.setFloat(2, nprice);
+           String nid = (String) id;
+           pstmt.setString(3, nid);
+           
+           pstmt.executeUpdate();
+           
+       } catch (ClassNotFoundException ex) {
+            Logger.getLogger(productadd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(productadd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return y;
+   }
+
 }
