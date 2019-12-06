@@ -42,7 +42,7 @@ public class productadd extends javax.swing.JFrame {
         addqty.setLocationRelativeTo(null);
         minusqty.setLocationRelativeTo(null);
         date.setText(""+df.format(date123));
-        displayall();
+        autorefresh.start();
     }
     productadd_class me = new productadd_class();
     line con = new line();
@@ -67,6 +67,48 @@ public class productadd extends javax.swing.JFrame {
             Logger.getLogger(productadd.class.getName()).log(Level.SEVERE, null, ex);
         }
    }
+   Thread autorefresh = new Thread(new Runnable(){
+       Notif notification = new Notif();
+             @Override
+             public void run() {
+                     try {
+                         while(true){
+                           displayall();
+                          notification.notification();
+                    
+                          Thread.sleep(5000);
+                     }
+                 } catch (InterruptedException ex) {
+               Logger.getLogger(productadd.class.getName()).log(Level.SEVERE, null, ex);
+           }
+                 
+             }
+             
+   
+   
+   });
+           final void refresh(String id){
+               
+           }
+//   Thread notify = new Thread(new Runnable(){
+//       Notif not = new Notif();
+//             @Override
+//             public void run() {
+//                     try {
+//                        while(true){
+//                        Thread.sleep(5000);
+//                     }
+//                 } catch (InterruptedException ex) {
+//               Logger.getLogger(productadd.class.getName()).log(Level.SEVERE, null, ex);
+//           }
+//                 
+//             }
+//             
+//   
+//   
+//   });
+    
+
    final void search(String key){
        try{
            Class.forName("com.mysql.jdbc.Driver");
@@ -165,7 +207,6 @@ public class productadd extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         date = new javax.swing.JLabel();
 
         update.setMinimumSize(new java.awt.Dimension(440, 330));
@@ -847,15 +888,6 @@ public class productadd extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(51, 255, 51));
-        jButton8.setText("Minus Quantity");
-        jButton8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 51), 2));
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -866,8 +898,7 @@ public class productadd extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -879,9 +910,7 @@ public class productadd extends javax.swing.JFrame {
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1119,29 +1148,6 @@ displayall();        // TODO add your handling code here:
        
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       int k = tbl.getSelectedRow();
-       if(k!=-1){
-           id = tbl.getValueAt(k, 0);
-       Object prod_name = tbl.getValueAt(k, 1).toString();
-       Object prod_price = tbl.getValueAt(k, 3).toString();
-       Object prod_qty = tbl.getValueAt(k, 2).toString();
-       
-       mqtypn.setText((String)prod_name);
-       mqtyp.setValue(Double.valueOf((String) prod_price));
-       mqtyqtylbl.setText((String)prod_qty);
-       
-       mqtyqty.setValue(0);
-       mqtypn.setEnabled(false);
-       mqtyp.setEnabled(false);
-       minusqty.setVisible(true);
-       minusqty.setAlwaysOnTop(true);
-       }else{
-           JOptionPane.showMessageDialog(rootPane, "Please select a row first","Warning",JOptionPane.WARNING_MESSAGE);
-       }
-       
-    }//GEN-LAST:event_jButton8ActionPerformed
-
     private void mqtypKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mqtypKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_mqtypKeyTyped
@@ -1218,7 +1224,6 @@ displayall();        // TODO add your handling code here:
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

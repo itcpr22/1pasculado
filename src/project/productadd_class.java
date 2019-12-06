@@ -113,24 +113,5 @@ public class productadd_class {
      }
           return x;
       }
-      public int minusqty(Object id,int quantity){
-          int x = 0;
-          try{
-              Class.forName("com.mysql.jdbc.Driver");
-              Connection conn = DriverManager.getConnection(con.url, con.user, con.pass);
-              String query = "Update addproduct set qty = qty - ? where id = ?;";
-              PreparedStatement pstmt = conn.prepareStatement(query);
-              
-              pstmt.setInt(1, quantity);
-              pstmt.setObject(2, id);
-              
-              x = pstmt.executeUpdate();
-              System.out.println(pstmt);
-          } catch (ClassNotFoundException ex) {
-         Logger.getLogger(productadd_class.class.getName()).log(Level.SEVERE, null, ex);
-     } catch (SQLException ex) {
-         Logger.getLogger(productadd_class.class.getName()).log(Level.SEVERE, null, ex);
-     }
-          return x;
-      }
+    
 }
